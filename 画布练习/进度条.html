@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>进度条</title>
+	<style>
+		body {
+			text-align: center;
+		}
+		canvas {
+			background: #ccc;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="c2" width="500" height="400"></canvas>
+</body>
+</html>
+<script>
+	//获取画布
+	let c2 = document.getElementById('c2');
+    //创建画笔对象
+    let ctx = c2.getContext("2d");
+    //绘制灰色的背景底框
+    //开始一条路径
+    ctx.beginPath();
+    //描边样式（空心）
+    ctx.strokeStyle = "#aaa";
+    //描边宽度
+    ctx.lineWidth=15;
+    //绘制圆拱形路径：5个参数：圆心位置X轴 圆心位置y轴 半径大小 开始角度 结束角度（必须是弧度）
+    ctx.arc(250,200,100,0,2*Math.PI);
+    //对当前路径描边 画空心圆
+    ctx.stroke();
+
+    //绘制绿色进度条
+    //设置开始和结束角度
+    let start = -90;
+    let end = -90;
+    let timer=setInterval(function(){
+        ctx.beginPath();
+        ctx.arc(250,200,100,start*Math.PI/180,end*Math.PI/180);
+        end+=5;
+        ctx.strokeStyle = "green";
+        ctx.stroke();
+        if(end>270){
+        	clearInterval(timer);
+        }
+    },100);
+    
+</script>
